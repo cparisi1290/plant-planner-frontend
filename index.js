@@ -47,5 +47,5 @@ function formHandler(e) {
     const additionalCareInput = document.querySelector("#additional-care-input").value
     const urlInput = document.querySelector("#url-input").value
 
-    postFetch()
+    postFetch(nameInput, wateringDayInput, roomInput, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, urlInput)
 }
