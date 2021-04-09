@@ -46,9 +46,20 @@ function formHandler(e) {
     const additionalCareInput = document.querySelector("#additional-care-input").value
     const urlInput = document.querySelector("#url-input").value
 
-    postFetch(nameInput, wateringDayInput, roomInput, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, urlInput)
+    postPlant(nameInput, wateringDayInput, roomInput, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, urlInput)
 }
 
-function postFetch(nameInput, wateringDayInput, room_id, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, image_url) {
-    console.log(nameInput, wateringDayInput, room_id, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, image_url)
+function postPlant(name, watering_day, room_id, light, water, food, humidity, temperature, toxicity, additional_care, image_url) {
+
+    let bodyData = {name, watering_day, room_id, light, water, food, humidity, temperature, toxicity, additional_care, image_url}
+
+    fetch(endPoint, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(bodyData)
+      })
+    .then(resp => resp.json())
+    .then(plant => {
+        console.log(plant);
+    })
 }
