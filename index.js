@@ -33,8 +33,7 @@ function fetchPlants() {
 
 function formHandler(e) {
     e.preventDefault()
-    console.log(e)
-    debugger
+    // console.log(e)
     const nameInput = document.querySelector("#name-input").value
     const wateringDayInput = document.querySelector("#watering-day-input").value
     const roomInput = parseInt(document.querySelector("#rooms").value)
@@ -48,4 +47,8 @@ function formHandler(e) {
     const urlInput = document.querySelector("#url-input").value
 
     postFetch(nameInput, wateringDayInput, roomInput, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, urlInput)
+}
+
+function postFetch(nameInput, wateringDayInput, room_id, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, image_url) {
+    console.log(nameInput, wateringDayInput, room_id, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, image_url)
 }
