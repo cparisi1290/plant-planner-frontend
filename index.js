@@ -24,7 +24,8 @@ function fetchPlants() {
                     <p><b>Temperature:</b> ${plant.attributes.temperature}</p>
                     <p><b>Toxicity:</b> ${plant.attributes.toxicity}</p>
                     <p><b>Additional Care:</b> ${plant.attributes.additional_care}</p>
-                </div>
+                    <button data-id=${plant.id}>Edit</button>
+                </div> <br><br>
             `;
             document.querySelector('#plant-container').innerHTML += plantMarkup
         })
