@@ -1,13 +1,16 @@
 const endPoint = "http://localhost:3000/api/v1/plants"
 document.addEventListener('DOMContentLoaded', () => {
-    fetchPlants();  
+    fetchPlants()
+
+    const plantForm = document.querySelector("#create-plant-form")
+
+    plantForm.addEventListener("submit", (e) => formHandler(e))
 })
 
 function fetchPlants() {
     fetch(endPoint)
     .then(resp => resp.json())
     .then(plants => {
-        console.log(plants);
         plants.data.forEach(plant => {
             const plantMarkup = `
                 <div data-id=${plant.id}>
@@ -25,5 +28,53 @@ function fetchPlants() {
             `;
             document.querySelector('#plant-container').innerHTML += plantMarkup
         })
+    })
+}
+
+function formHandler(e) {
+    e.preventDefault()
+    // console.log(e)
+    const nameInput = document.querySelector("#name-input").value
+    const wateringDayInput = document.querySelector("#watering-day-input").value
+    const roomInput = parseInt(document.querySelector("#rooms").value)
+    const lightInput = document.querySelector("#light-input").value
+    const waterInput = document.querySelector("#water-input").value
+    const foodInput = document.querySelector("#food-input").value
+    const humidityInput = document.querySelector("#humidity-input").value
+    const temperatureInput = document.querySelector("#temperature-input").value
+    const toxicityInput = document.querySelector("#toxicity-input").value
+    const additionalCareInput = document.querySelector("#additional-care-input").value
+    const urlInput = document.querySelector("#url-input").value
+
+    postPlant(nameInput, wateringDayInput, roomInput, lightInput, waterInput, foodInput, humidityInput, temperatureInput, toxicityInput, additionalCareInput, urlInput)
+}
+
+function postPlant(name, watering_day, room_id, light, water, food, humidity, temperature, toxicity, additional_care, image_url) {
+
+    let bodyData = {name, watering_day, room_id, light, water, food, humidity, temperature, toxicity, additional_care, image_url}
+
+    fetch(endPoint, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(bodyData)
+      })
+    .then(resp => resp.json())
+    .then(plant => {
+        const plantData = plant.data.attributes
+        const plantMarkup = `
+            <div data-id=${plant.id}>
+                <img src=${plantData.image_url} height="200" width="250">
+                <h1>${plantData.attributes.name}</h1>
+                <h2>Watering Day: ${plantData.watering_day} - Location: ${plantData.room.name}</h2>
+                <h3>Plant Info</h3>
+                <p><b>Light:</b> ${plantData.light}</p>
+                <p><b>Water:</b> ${plantData.water}</p>
+                <p><b>Humidity:</b> ${plantData.humidity}</p>
+                <p><b>Temperature:</b> ${plantData.temperature}</p>
+                <p><b>Toxicity:</b> ${plantData.toxicity}</p>
+                <p><b>Additional Care:</b> ${plantData.additional_care}</p>
+            </div>
+        `;
+        document.querySelector('#plant-container').innerHTML += plantMarkup
     })
 }

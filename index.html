@@ -8,6 +8,65 @@
     <script type="text/javascript" src="index.js"></script>
 </head>
 <body>
+
+    <div class="form-container">
+
+        <form id="create-plant-form">
+            <h3>Add a New Plant!</h3>
+            <label for="name">Name:</label>
+            <input id='name-input' type="text" name="name" value="" placeholder="Enter plant name..." class="input-text">
+            <br><br>
+            <p>Choose A Watering Day</p>
+            <select id='watering-day-input' name="watering-day" value="">
+                <option value="blank"></option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+            </select>
+            <p>Choose A Room </p>
+            <select id="rooms" name="rooms">
+                <!-- <option value="blank"></option> -->
+                <option value="1">Living Room</option>
+                <option value="2">Bedroom</option>
+                <option value="3">Kitchen</option>
+            </select>
+            <br><br>
+            <label for="ligt">Light:</label>
+            <input id='light-input' type="text" name="light" value=""  class="input-text">
+            <br><br>
+            <label for="water">Water:</label>
+            <input id='water-input' type="text" name="water" value="" class="input-text">
+            <br><br>
+            <label for="food">Food:</label>
+            <input id='food-input' type="text" name="food" value="" class="input-text">
+            <br><br>
+            <label for="humidity">Humidity:</label>
+            <input id='humidity-input' type="text" name="humidity" value="" class="input-text">
+            <br><br>
+            <label for="temperature">Temperature:</label>
+            <input id='temperature-input' type="text" name="temperature" value="" class="input-text">
+            <br><br>
+            <label for="toxicity">Toxicity:</label>
+            <input id='toxicity-input' type="text" name="toxicity" value="" class="input-text">
+            <br><br>
+            <label for="additional-care">Additional Care:</label>
+            <input id='additional-care-input' type="text" name="additional-care" value="" class="input-text">
+            <br><br>
+            <label for="image">Image:</label>
+            <input id='url-input' type="text" name="image" value="" class="input-text">
+            <br><br>
+            
+            <input id= 'create-button' type="submit" name="submit" value="Add A New Plant" class="submit">
+    
+        </form>
+      </div>
+  
+  <br><br><br><br>
+
     <div id="plant-container">
         
     </div>
