@@ -60,6 +60,21 @@ function postPlant(name, watering_day, room_id, light, water, food, humidity, te
       })
     .then(resp => resp.json())
     .then(plant => {
-        console.log(plant);
+        const plantData = plant.data.attributes
+        const plantMarkup = `
+            <div data-id=${plant.id}>
+                <img src=${plantData.image_url} height="200" width="250">
+                <h1>${plantData.attributes.name}</h1>
+                <h2>Watering Day: ${plantData.watering_day} - Location: ${plantData.room.name}</h2>
+                <h3>Plant Info</h3>
+                <p><b>Light:</b> ${plantData.light}</p>
+                <p><b>Water:</b> ${plantData.water}</p>
+                <p><b>Humidity:</b> ${plantData.humidity}</p>
+                <p><b>Temperature:</b> ${plantData.temperature}</p>
+                <p><b>Toxicity:</b> ${plantData.toxicity}</p>
+                <p><b>Additional Care:</b> ${plantData.additional_care}</p>
+            </div>
+        `;
+        document.querySelector('#plant-container').innerHTML += plantMarkup
     })
 }
