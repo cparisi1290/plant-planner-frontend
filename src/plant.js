@@ -34,6 +34,10 @@ class Plant {
             </div> <br><br>
         `;
     }
+
+    static findById(id) {
+        return this.all.find(plant => plant.id === id);
+    }
 }
 
 Plant.all = [];
