@@ -12,24 +12,28 @@ function fetchPlants() {
     .then(resp => resp.json())
     .then(plants => {
         plants.data.forEach(plant => {
-            const plantMarkup = `
-                <div data-id=${plant.id}>
-                    <img src=${plant.attributes.img_url} height="200" width="250">
-                    <h1>${plant.attributes.name}</h1>
-                    <h2>Watering Day: ${plant.attributes.watering_day} - Location: ${plant.attributes.room.name}</h2>
-                    <h3>Plant Info</h3>
-                    <p><b>Light:</b> ${plant.attributes.light}</p>
-                    <p><b>Water:</b> ${plant.attributes.water}</p>
-                    <p><b>Humidity:</b> ${plant.attributes.humidity}</p>
-                    <p><b>Temperature:</b> ${plant.attributes.temperature}</p>
-                    <p><b>Toxicity:</b> ${plant.attributes.toxicity}</p>
-                    <p><b>Additional Care:</b> ${plant.attributes.additional_care}</p>
-                    <button data-id=${plant.id}>Edit</button>
-                </div> <br><br>
-            `;
-            document.querySelector('#plant-container').innerHTML += plantMarkup
+           render(plant)
         })
     })
+}
+
+function render(plant) {
+    const plantContainer = `
+    <div data-id=${plant.id}>
+        <img src=${plant.attributes.img_url} height="200" width="250">
+        <h1>${plant.attributes.name}</h1>
+        <h2>Watering Day: ${plant.attributes.watering_day} - Location: ${plant.attributes.room.name}</h2>
+        <h3>Plant Info</h3>
+        <p><b>Light:</b> ${plant.attributes.light}</p>
+        <p><b>Water:</b> ${plant.attributes.water}</p>
+        <p><b>Humidity:</b> ${plant.attributes.humidity}</p>
+        <p><b>Temperature:</b> ${plant.attributes.temperature}</p>
+        <p><b>Toxicity:</b> ${plant.attributes.toxicity}</p>
+        <p><b>Additional Care:</b> ${plant.attributes.additional_care}</p>
+        <button class="delete" data-id=${plant.id}>Delete</button>
+    </div> <br><br>
+`;
+document.querySelector('#plant-container').innerHTML += plantContainer
 }
 
 function formHandler(e) {
@@ -61,22 +65,7 @@ function postPlant(name, watering_day, room_id, light, water, food, humidity, te
       })
     .then(resp => resp.json())
     .then(plant => {
-        console.log(plant)
-        const plantData = plant.data.attributes
-        const plantMarkup = `
-            <div data-id=${plant.id}>
-                <img src=${plantData.image_url} height="200" width="250">
-                <h1>${plantData.name}</h1>
-                <h2>Watering Day: ${plantData.watering_day} - Location: ${plantData.room.name}</h2>
-                <h3>Plant Info</h3>
-                <p><b>Light:</b> ${plantData.light}</p>
-                <p><b>Water:</b> ${plantData.water}</p>
-                <p><b>Humidity:</b> ${plantData.humidity}</p>
-                <p><b>Temperature:</b> ${plantData.temperature}</p>
-                <p><b>Toxicity:</b> ${plantData.toxicity}</p>
-                <p><b>Additional Care:</b> ${plantData.additional_care}</p>
-            </div>
-        `;
-        document.querySelector('#plant-container').innerHTML += plantMarkup
+        const plantData = plant.data
+            render(plantData)
     })
 }
