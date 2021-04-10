@@ -42,11 +42,13 @@ function postPlant(name, watering_day, room_id, light, water, food, humidity, te
 
     let bodyData = {name, watering_day, room_id, light, water, food, humidity, temperature, toxicity, additional_care, image_url}
 
-    fetch(endPoint, {
+    const configObj = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(bodyData)
-      })
+      }
+
+    fetch(endPoint, configObj)
     .then(resp => resp.json())
     .then(plant => {
         const plantData = plant.data
