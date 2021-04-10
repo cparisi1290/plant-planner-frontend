@@ -50,6 +50,8 @@ function postPlant(name, watering_day, room_id, light, water, food, humidity, te
     .then(resp => resp.json())
     .then(plant => {
         const plantData = plant.data
-            render(plantData)
+        let newPlant = new Plant(plantData, plantData.attributes)
+        
+        document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
     })
 }
