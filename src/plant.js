@@ -37,7 +37,7 @@ class Plant {
 
     static findById(id) {
         return this.all.find(plant => plant.id === id);
-      }
+    }
 }
 
 Plant.all = [];
