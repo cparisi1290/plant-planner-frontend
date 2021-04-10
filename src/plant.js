@@ -34,6 +34,10 @@ class Plant {
             <button data-id=${this.id} class="delete" data-id=${this.id}>Delete</button><br><br><br><br>
         `;
     }
+
+    static findById(id) {
+        return this.all.find(plant => plant.id === id);
+      }
 }
 
 Plant.all = [];
