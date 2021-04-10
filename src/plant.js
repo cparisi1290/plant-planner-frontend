@@ -18,7 +18,7 @@ class Plant {
 
     renderPlantCard() {
         return `
-            <div data-id=${this.id}>
+            <div data-id=plant-${this.id}>
                 <img src=${this.img_url} height="200" width="250">
                 <h1>${this.name}</h1>
                 <h2>Watering Day: ${this.watering_day} - Location: ${this.room.name}</h2>
