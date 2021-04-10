@@ -15,6 +15,25 @@ class Plant {
         this.image_url = plantAttributes.image_url
         Plant.all.push(this)
     } 
+
+    renderPlantCard() {
+        return `
+            <div data-id=${this.id}>
+                <img src=${this.img_url} height="200" width="250">
+                <h1>${this.name}</h1>
+                <h2>Watering Day: ${this.watering_day} - Location: ${this.room.name}</h2>
+                <h3>Plant Info</h3>
+                <p><b>Light:</b> ${this.light}</p>
+                <p><b>Water:</b> ${this.water}</p>
+                <p><b>Humidity:</b> ${this.humidity}</p>
+                <p><b>Temperature:</b> ${this.temperature}</p>
+                <p><b>Toxicity:</b> ${this.toxicity}</p>
+                <p><b>Additional Care:</b> ${this.additional_care}</p>
+                <button class="edit" data-id=${this.id}>Edit</button>
+                <button class="delete" data-id=${this.id}>Delete</button>
+            </div> <br><br>
+        `;
+    }
 }
 
 Plant.all = [];
