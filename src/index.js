@@ -12,7 +12,10 @@ function fetchPlants() {
     .then(resp => resp.json())
     .then(plants => {
         plants.data.forEach(plant => {
-           render(plant)
+            // every new instance goes through constructor
+            let newPlant = new Plant(plant, plant.attributes)
+
+            render(plant)
         })
     })
 }
@@ -30,6 +33,7 @@ function render(plant) {
         <p><b>Temperature:</b> ${plant.attributes.temperature}</p>
         <p><b>Toxicity:</b> ${plant.attributes.toxicity}</p>
         <p><b>Additional Care:</b> ${plant.attributes.additional_care}</p>
+        <button class="edit" data-id=${plant.id}>Edit</button>
         <button class="delete" data-id=${plant.id}>Delete</button>
     </div> <br><br>
 `;
