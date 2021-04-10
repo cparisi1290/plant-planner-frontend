@@ -15,29 +15,9 @@ function fetchPlants() {
             // every new instance goes through constructor
             let newPlant = new Plant(plant, plant.attributes)
 
-            render(plant)
+            document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
         })
     })
-}
-
-function render(plant) {
-    const plantContainer = `
-    <div data-id=${plant.id}>
-        <img src=${plant.attributes.img_url} height="200" width="250">
-        <h1>${plant.attributes.name}</h1>
-        <h2>Watering Day: ${plant.attributes.watering_day} - Location: ${plant.attributes.room.name}</h2>
-        <h3>Plant Info</h3>
-        <p><b>Light:</b> ${plant.attributes.light}</p>
-        <p><b>Water:</b> ${plant.attributes.water}</p>
-        <p><b>Humidity:</b> ${plant.attributes.humidity}</p>
-        <p><b>Temperature:</b> ${plant.attributes.temperature}</p>
-        <p><b>Toxicity:</b> ${plant.attributes.toxicity}</p>
-        <p><b>Additional Care:</b> ${plant.attributes.additional_care}</p>
-        <button class="edit" data-id=${plant.id}>Edit</button>
-        <button class="delete" data-id=${plant.id}>Delete</button>
-    </div> <br><br>
-`;
-document.querySelector('#plant-container').innerHTML += plantContainer
 }
 
 function formHandler(e) {
