@@ -29,12 +29,15 @@ class Plant {
                 <p><b>Temperature:</b> ${this.temperature}</p>
                 <p><b>Toxicity:</b> ${this.toxicity}</p>
                 <p><b>Additional Care:</b> ${this.additional_care}</p>
-                </div> 
-                <button class="edit" data-id=${this.id}>Edit</button>
-                <button class="delete" data-id=${this.id}>Delete</button>
-                <br><br>
+            </div> <br>
+            <button data-id=${this.id} class="edit" data-id=${this.id}>Edit</button>
+            <button data-id=${this.id} class="delete" data-id=${this.id}>Delete</button><br><br><br><br>
         `;
     }
+
+    static findById(id) {
+        return this.all.find(plant => plant.id === id);
+      }
 }
 
 Plant.all = [];

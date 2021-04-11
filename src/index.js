@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchPlants()
 
     const plantForm = document.querySelector("#create-plant-form")
-
+    
     plantForm.addEventListener("submit", (e) => formHandler(e))
 })
 
