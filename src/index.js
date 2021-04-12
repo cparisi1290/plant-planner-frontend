@@ -2,9 +2,11 @@ const endPoint = "http://localhost:3000/api/v1/plants"
 document.addEventListener('DOMContentLoaded', () => {
     fetchPlants()
 
-    const plantForm = document.querySelector("#create-plant-form")
-    
+    const plantForm = document.querySelector("#plant-form")
     plantForm.addEventListener("submit", (e) => formHandler(e))
+
+    const deletePlant = document.querySelector("#plant-container")
+    deletePlant.addEventListener("click", (e) => deleteHandler(e))
 })
 
 function fetchPlants() {
@@ -15,7 +17,7 @@ function fetchPlants() {
             // every new instance goes through constructor
             let newPlant = new Plant(plant, plant.attributes)
 
-            document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
+            document.querySelector("#plant-container").innerHTML += newPlant.renderPlantCard()
         })
     })
 }
@@ -54,6 +56,25 @@ function postPlant(name, watering_day, room_id, light, water, food, humidity, te
         const plantData = plant.data
         let newPlant = new Plant(plantData, plantData.attributes)
         
-        document.querySelector('#plant-container').innerHTML += newPlant.renderPlantCard()
+        document.querySelector("#plant-container").innerHTML += newPlant.renderPlantCard()
     })
+}
+
+function deleteHandler(e) {
+    // optimistic delete
+    e.target.remove()
+    const id = e.target.dataset.id;
+    
+    const configObj = {
+        method: "DELETE",
+            headers: {"Content-Type": "application/json",
+            Accepts: "application/json"
+            // don't need a body because params are not being sent through
+        }
+      }
+      
+    fetch(endPoint + `/${id}`, configObj) 
+        .then (resp => resp.json())
+        .then (plant => alert(plant.message))
+        
 }
