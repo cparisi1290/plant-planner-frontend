@@ -5,8 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const plantForm = document.querySelector("#plant-form")
     plantForm.addEventListener("submit", (e) => formHandler(e))
 
-    const deletePlant = document.querySelector("#plant-container")
-    deletePlant.addEventListener("click", (e) => deleteHandler(e))
+    // const deletePlant = document.querySelectorAll("button.delete")
+    // console.log(deletePlant)
+    // deletePlant.forEach(
+    //     plant => plant.addEventListener("click", (e) => deleteHandler(e))   
+    // )
 })
 
 function fetchPlants() {
@@ -17,7 +20,7 @@ function fetchPlants() {
             // every new instance goes through constructor
             let newPlant = new Plant(plant, plant.attributes)
 
-            document.querySelector("#plant-container").innerHTML += newPlant.renderPlantCard()
+            document.querySelector("#plant-container").append(newPlant.renderPlantCard())
         })
     })
 }
@@ -56,15 +59,16 @@ function postPlant(name, watering_day, room_id, light, water, food, humidity, te
         const plantData = plant.data
         let newPlant = new Plant(plantData, plantData.attributes)
         
-        document.querySelector("#plant-container").innerHTML += newPlant.renderPlantCard()
+        document.querySelector("#plant-container").append( newPlant.renderPlantCard())
     })
 }
 
 function deleteHandler(e) {
     // optimistic delete
-    e.target.remove()
-    const id = e.target.dataset.id;
     
+    const id = e.target.id;
+    console.log(e.target)
+    e.target.parentElement.remove()
     const configObj = {
         method: "DELETE",
             headers: {"Content-Type": "application/json",
