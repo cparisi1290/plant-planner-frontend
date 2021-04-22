@@ -3,7 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchPlants()
 
     const plantForm = document.querySelector("#plant-form")
-    plantForm.addEventListener("submit", (e) => formHandler(e))
+    plantForm.addEventListener("submit", (e) => 
+    {console.log("anything") 
+    formHandler(e)})
 
     // const deletePlant = document.querySelectorAll("button.delete")
     // console.log(deletePlant)
@@ -17,9 +19,8 @@ function fetchPlants() {
     .then(resp => resp.json())
     .then(plants => {
         plants.data.forEach(plant => {
-            // every new instance goes through constructor
+            // every new instance goes through constructor and creates new instance of plant
             let newPlant = new Plant(plant, plant.attributes)
-
             document.querySelector("#plant-container").append(newPlant.renderPlantCard())
         })
     })
@@ -27,7 +28,7 @@ function fetchPlants() {
 
 function formHandler(e) {
     e.preventDefault()
-    // console.log(e)
+
     const nameInput = document.querySelector("#name-input").value
     const wateringDayInput = document.querySelector("#watering-day-input").value
     const roomInput = parseInt(document.querySelector("#rooms").value)
@@ -57,7 +58,7 @@ function postPlant(name, watering_day, room_id, light, water, food, humidity, te
     .then(resp => resp.json())
     .then(plant => {
         const plantData = plant.data
-        let newPlant = new Plant(plantData, plantData.attributes)
+        let newPlant = new Plant(plantData)
         
         document.querySelector("#plant-container").append( newPlant.renderPlantCard())
     })
@@ -67,7 +68,6 @@ function deleteHandler(e) {
     // optimistic delete
     
     const id = e.target.id;
-    console.log(e.target)
     e.target.parentElement.remove()
     const configObj = {
         method: "DELETE",
