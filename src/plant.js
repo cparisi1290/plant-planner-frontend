@@ -1,18 +1,20 @@
 class Plant {
 
-    constructor(plant, plantAttributes) {
-        this.id = plant.id;
-        this.name = plantAttributes.name
-        this.watering_day =plantAttributes.watering_day
-        this.room = plantAttributes.room
-        this.light = plantAttributes.light
-        this.water = plantAttributes.water
-        this.food = plantAttributes.food
-        this.humidity = plantAttributes.humidity
-        this.temperature = plantAttributes.temperature
-        this.toxicity = plantAttributes.toxicity
-        this.additional_care = plantAttributes.additional_care
-        this.image_url = plantAttributes.image_url
+    constructor(plant) {
+        const {attributes, id} = plant
+
+        this.id = id;
+        this.name = attributes.name
+        this.watering_day = attributes.watering_day
+        this.room = attributes.room
+        this.light = attributes.light
+        this.water = attributes.water
+        this.food = attributes.food
+        this.humidity = attributes.humidity
+        this.temperature = attributes.temperature
+        this.toxicity = attributes.toxicity
+        this.additional_care = attributes.additional_care
+        this.image_url = attributes.image_url
         Plant.all.push(this)
     } 
 
@@ -23,7 +25,6 @@ class Plant {
         deleteButton.innerText = "delete"
         // `<button type="button" class="delete" data-id=${id}>Delete</button><br><br><br><br></br>`
         deleteButton.addEventListener('click', (e) => deleteHandler(e))
-        console.log(deleteButton)
         return deleteButton
     }
 
@@ -33,29 +34,41 @@ class Plant {
         plant.className = plant.id
 
         let body = `
-                <img src=${this.img_url} height="200" width="250">
-                <h1>${this.name}</h1>
-                <h2>Watering Day: ${this.watering_day} - Location: ${this.room.name}</h2>
-                <h3>Plant Info</h3>
-                <p><b>Light:</b> ${this.light}</p>
-                <p><b>Water:</b> ${this.water}</p>
-                <p><b>Food:</b> ${this.food}</p>
-                <p><b>Humidity:</b> ${this.humidity}</p>
-                <p><b>Temperature:</b> ${this.temperature}</p>
-                <p><b>Toxicity:</b> ${this.toxicity}</p>
-                <p><b>Additional Care:</b> ${this.additional_care}</p>
-            `;
+        <div class="row row-cols-4">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                    <img src=${this.image_url} class="card-img-top">
+                    
+                        <h4 class="card-title text-center">${this.name}</h4>
+                        <h6 class="card-subtitle text-center"><b>Watering Day: ${this.watering_day} | Location: ${this.room.name}</b></h6><br>
+                        <p class="card-text mb-2 text-muted text-center"><b>Plant Information</b></p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Light: ${this.light}</li>
+                            <li class="list-group-item">Water: ${this.water}</li>
+                            <li class="list-group-item">Food: ${this.food}</li>
+                            <li class="list-group-item">Humidity: ${this.humidity}</li>
+                            <li class="list-group-item">Temperature: ${this.temperature}</li>
+                            <li class="list-group-item">Toxicity: ${this.toxicity}</li>
+                            <li class="list-group-item">Additonal Care: ${this.additional_care}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        `;
         plant.innerHTML = body
         plant.append(this.deletePlant(this.id))
-        console.log(plant)
+
         return plant
     }
-
-
-
+    
+    
+    
     // static findById(id) {
-    //     return this.all.find(plant => plant.id === id);
-    // }
-}
-
-Plant.all = [];
+        //     return this.all.find(plant => plant.id === id);
+        // }
+    }
+    
+    Plant.all = [];
