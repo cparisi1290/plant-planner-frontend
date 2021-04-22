@@ -1,7 +1,7 @@
 # Welcome to Plant Planner!
 ## How not to kill your plants!
     Keep your plants happy and healthy with Plant Planner. It is a scheduling system that helps you keep track of all your plants and how to care for them. 
-    Add each plant to this app and any specific information to help it grow and more importanly, *thrive*. Share this app with friends and family so they know how to tend to your plants when you are away. Input information such as where your plants are located, any additional needs for each plant, how to care for your plants and add picture to make it super clear. Happy Planting!
+    Add each plant to this app and any specific information to help it grow and more importantly, *thrive*. Share this app with friends and family so they know how to tend to your plants when you are away. Input information such as where your plants are located, any additional needs for each plant, how to care for your plants and add picture to make it super clear. Happy Planting!
 
 ## Installation Frontend
 
